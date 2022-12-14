@@ -3,8 +3,6 @@ import express, { NextFunction, Request, Response } from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
-import rt_web_ui from './routes/web_ui';
-import rt_web_api from './routes/web_api';
 import rt_json_api from './routes/json_api';
 import { cfg } from './globals';
 
@@ -24,8 +22,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/web', rt_web_ui);
-app.use('/web', rt_web_api);
 app.use('/', rt_json_api);
 
 // catch 404 and forward to error handler

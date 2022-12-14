@@ -46,7 +46,7 @@ const setupRouter = () => {
 
     const newId = await addPage(pageFields);
 
-    const redirUrl = path.posix.join(cfg.path.web, '/api/pages/', newId, '/');
+    const redirUrl = path.posix.join(cfg.appRoot, '/pages/', newId, '/');
     res.status(201).set('Location', redirUrl).end();
   });
 
@@ -85,7 +85,8 @@ const setupRouter = () => {
     });
 
   router.post('/parse/', async (req: Request, res: Response, _next: NextFunction) => {
-    return await findPages(req.body);
+    const foundPages = await findPages(req.body);
+    res.json(foundPages);
   });
 
   return router;

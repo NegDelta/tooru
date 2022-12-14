@@ -10,11 +10,6 @@ export interface Page extends PageUserEditableFields {
   edit_time: string;
 }
 
-export interface PageRenderProps extends Page {
-  rendered_time: string;
-  rendered_edit_time: string;
-}
-
 export type SqlPagesSchema = {
   id: string;
   time: string;

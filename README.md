@@ -2,6 +2,8 @@
 
 A booru, except for text. In fact, this is another run-of-the-mill study-CRUD-wiki app, the most fitting of the three being the study part, in that the two primary reasons for developing the app are to provide a useful tool and to provide experience with the tools used, including MariaDB for the database part, as well as the design process for a piece of software. As this is more of a personal tool, the whole multi-user part with accounts and so on is not on the todo list.
 
+This repository covers the app being exposed as a REST API. For a frontend implementation, see `tooru-web`.
+
 ## What it's all about
 
 ### Pages
@@ -25,21 +27,16 @@ The generated id has 3 forms:
 - Run `setup.sql`.
 - Copy `src/config.json` from `config.default.json`.
 
-## Immediate to-dos
+## To-dos
 
-### Decoupling frontend and backend
+Legend:
 
-- Fork to `tooru-web`
+- ✨ — will most likely see work next
+- 🌐 — might be implemented at frontend
 
-## Long-term to-dos
+## Immediate
 
-Some ideas are more fleshed-out that the others. Glitter ✨ is for the parts that will most likely see work next.
-
-### Dev-adjacent improvements
-
-- Frontend library (React)
-
-### ✨ Deserialization
+### Deserialization
 
 That is, loading backups.
 
@@ -51,6 +48,10 @@ That is, loading backups.
       - skip ids clashing with pages existing in db
     - valid Content has at least one of (title, body), \[lead\]
   - prepare data to fill in for logic requests
+
+## Long-term
+
+Some ideas are more fleshed-out that the others. Glitter ✨ is for the parts that will most likely see work next.
 
 ### ✨ Tags
 
@@ -81,28 +82,21 @@ Rather special cases than MediaWiki-style special. That's because the latter wou
 
 ### Others
 
-- Validate input to disallow (or at least prompt for confirmation) completely empty pages
 - Upload: prompt correction when encountering invalid (id, time_created) combo
-- Sort and filter pages
+- 🌐 Sort and filter pages
 - Actual npm magic around versions and changes
-- Use Quill.js for page editor
-- Rendering options
+- 🌐 Rendering options
   - All newlines are paragraph breaks, y/n
   - Collapse newlines
   - Plaintext vs Markdown
   - Preprocessing
-- Keyboard-only navigation with one-key shortcuts
 - Analytics
 - Page metadata
   - Written-in description
   - Dates of creation, last edition, etc.
-- File-like flow of page state
-  - Save As
-  - Duplicate
 - Page shortcuts
   - Few characters long
   - To go with the quick goto
-- Use CSS preprocessing
 - Verify existence and structure of `config.json`
   - Report any problems in console
 - Check database for specified tables and columns
