@@ -6,5 +6,6 @@
   "json.format.keepLines": true,
   "eslint.alwaysShowStatus": true,
   "eslint.format.enable": true,
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "files.eol": "\n"
 }

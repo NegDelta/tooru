@@ -1,9 +1,8 @@
-import createDebug from 'debug';
+import { tooruDebug } from './utils';
+import { Page, PageJsonParseResult, PagePostRequest } from 'tooru-common';
 import sqlApi from './sql';
-import { Page, PageUserEditableFields } from './types';
 
-createDebug.enable('tooru:*');
-const _debug = createDebug('tooru:logic');
+const _debug = tooruDebug('logic');
 
 export const createId = (timeint: number, dupecount: number) => {
   const timestr_nosuffix = timeint.toString();
@@ -45,13 +44,13 @@ export const createId = (timeint: number, dupecount: number) => {
   };
 };
 
-export const updatePage = async (pageId: string, { title, lead, body }: PageUserEditableFields) => {
+export const updatePage = async (pageId: string, { title, lead, body }: PagePostRequest) => {
   const timeCreated = Date.now().valueOf();
 
   await sqlApi.updatePage(timeCreated, title, lead, body, pageId);
 };
 
-export const addPage = async ({ title, lead, body }: PageUserEditableFields) => {
+export const addPage = async ({ title, lead, body }: PagePostRequest) => {
   const timeCreated = Date.now().valueOf();
   const dupesResponse = await sqlApi.getPagesByTime(timeCreated);
   const dupesCount = Number(dupesResponse[0].dupes);
@@ -72,7 +71,16 @@ export const getPage = async (pageId: string) => {
 
 export const getAllPages = async () => (await sqlApi.getSortedAllPages()) as Page[];
 
-export const findPages = (_content = '') => {
-  const pages = [] as Page[];
-  return pages;
+export const findPages = (content = ''): PageJsonParseResult => {
+  let _contentJson: unknown;
+  try {
+    _contentJson = JSON.parse(content);
+  } catch (SyntaxError) {
+    return { matches: [], message: 'Invalid JSON.' };
+  }
+  // construct object candidates with paths
+  return {
+    matches: [],
+    message: `Valid JSON (${content.length} chars). Finding pages not implemented`
+  };
 };

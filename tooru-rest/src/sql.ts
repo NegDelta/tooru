@@ -1,12 +1,12 @@
-import createDebug from 'debug';
 import { createPool, UpsertResult } from 'mariadb';
 import { cfg } from './globals';
 import { QueryParametersList, SqlSelectDupesResult, SqlSelectPagesResult } from './types';
+import { tooruDebug } from './utils';
 
-createDebug.enable('tooru:*');
-const debug = createDebug('tooru:sql');
+const debug = tooruDebug('sql');
 
 const pool = createPool(cfg.dbpool);
+debug(`created pool for ${cfg.dbpool.host}`);
 
 const queryAndDebug =
   <S extends QueryParametersList, T>(sql: string) =>

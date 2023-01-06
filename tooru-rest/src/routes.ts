@@ -1,14 +1,17 @@
 // These endpoints are to be called directly, and do not return pages.
 
-import path from 'path';
-import createDebug from 'debug';
+import { tooruDebug } from './utils';
 import { NextFunction, Response, Request, Router } from 'express';
-import { addPage, deletePage, getAllPages, getPage, createId, updatePage, findPages } from '../logic';
-import { PageUserEditableFields } from '../types';
-import { cfg } from '../globals';
+import {
+  PageCollectionGetResponse,
+  PageGetResponse,
+  PageParsePostResponse,
+  PagePostRequest,
+  PageJsonParseResult
+} from 'tooru-common';
+import { addPage, deletePage, getAllPages, getPage, createId, updatePage, findPages } from './logic';
 
-createDebug.enable('tooru:*');
-const debug = createDebug('tooru:jsonapi');
+const debug = tooruDebug('jsonapi');
 
 const set_dl = (req: Request<unknown, unknown, unknown, { dl?: string }>, res: Response, filename: string) => {
   if ((req.query.dl || '') === '1') {
@@ -34,7 +37,8 @@ const setupRouter = () => {
 
   // GET all pages
   router.get('/pages/', async (req: Request, res: Response, _next: NextFunction) => {
-    const pages = await getAllPages();
+    const pagesRes = await getAllPages();
+    const pages: PageCollectionGetResponse = pagesRes;
 
     set_dl(req, res, 'tooru-pages');
     res.json(pages);
@@ -42,12 +46,11 @@ const setupRouter = () => {
 
   // POST new page
   router.post('/pages/new/', async (req: Request, res: Response, _next: NextFunction) => {
-    const pageFields: PageUserEditableFields = req.body;
+    const pageFields: PagePostRequest = req.body;
 
     const newId = await addPage(pageFields);
 
-    const redirUrl = path.posix.join(cfg.appRoot, '/pages/', newId, '/');
-    res.status(201).set('Location', redirUrl).end();
+    res.status(200).send(newId);
   });
 
   // GET, PUT (edit), DELETE a given page
@@ -60,19 +63,20 @@ const setupRouter = () => {
     .get(async (req: Request, res: Response, _next: NextFunction) => {
       const id = req.params.id;
 
-      const page = await getPage(id);
-      debug('got page:', page);
-      if (!page) {
+      const pageRes = await getPage(id);
+      debug('got page:', pageRes);
+      if (!pageRes) {
         res.status(404).end();
         return;
       }
+      const page: PageGetResponse = pageRes;
 
       set_dl(req, res, id);
       res.json(page);
     })
     .put(async (req: Request, res: Response, _next: NextFunction) => {
       const id = req.params.id;
-      const pageFields: PageUserEditableFields = req.body;
+      const pageFields: PagePostRequest = req.body;
       await updatePage(id, pageFields);
 
       res.status(204).end();
@@ -85,8 +89,9 @@ const setupRouter = () => {
     });
 
   router.post('/parse/', async (req: Request, res: Response, _next: NextFunction) => {
-    const foundPages = await findPages(req.body);
-    res.json(foundPages);
+    const matchesRes: PageJsonParseResult = await findPages(req.body);
+    const matches: PageParsePostResponse = matchesRes;
+    res.json(matches);
   });
 
   return router;

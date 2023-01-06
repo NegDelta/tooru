@@ -6,10 +6,9 @@
 
 import app from './app';
 import http from 'http';
-import createDebug from 'debug';
+import { tooruDebug } from './utils';
 
-createDebug.enable('tooru:*');
-const debug = createDebug('tooru:server');
+const debug = tooruDebug('server');
 
 /**
  * Get port from environment and store in Express.

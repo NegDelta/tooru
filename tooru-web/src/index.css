@@ -1,0 +1,54 @@
+:root {
+  --bgblack: #333333;
+  --black: #222222;
+  --white: #cccccc;
+  --bkshade: #191919;
+  --whshade: #999999;
+  --accenta: #00725d;
+  --accentb: #c93362;
+  --aashade: #0b443a;
+  --abshade: #852b48;
+}
+
+body {
+  background-color: var(--bgblack);
+  color: var(--white);
+}
+body,
+textarea {
+  font: 14px 'Lucida Grande', 'Segoe UI', Helvetica, sans-serif;
+}
+
+a {
+  color: var(--accenta);
+}
+
+#root {
+  width: 1000px;
+  margin: 15px auto 0;
+}
+
+button {
+  background: var(--accenta);
+  height: 30px;
+  padding: 0px 10px 0px;
+  color: white;
+  text-shadow: 0 1px 0 var(--bgblack);
+  border: 0px;
+  border-radius: 5px;
+  border-bottom: var(--aashade) 2px solid;
+  box-sizing: border-box;
+}
+
+button + button {
+  margin-left: 10px;
+}
+
+h1 {
+  margin-bottom: 0.3em;
+}
+
+.pre {
+  white-space: pre-wrap;
+  font-family: monospace;
+}

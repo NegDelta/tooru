@@ -1,0 +1,153 @@
+#header {
+  height: 50px;
+  margin-bottom: 15px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px var(--white) solid;
+  padding-bottom: 15px;
+}
+
+#pageicon {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  margin: 0 5px -1px;
+  padding: 0;
+}
+
+#pagetitle {
+  position: absolute;
+  left: 60px;
+  top: 25px;
+  font-size: 20px;
+}
+
+.menu {
+  font-size: 14px;
+}
+
+#mainm {
+  border-bottom: 1px var(--white) solid;
+  position: absolute;
+  left: 66px;
+  top: 0;
+}
+#pagetm {
+  display: inline-block;
+  border-left: 1px var(--white) solid;
+  margin-left: 20px;
+}
+
+.menu ul {
+  margin: 0;
+  padding: 0 10px;
+}
+
+.menu li {
+  display: inline;
+  padding: 0 10px;
+}
+
+.menu a,
+h1 a {
+  color: var(--white);
+  text-decoration: none;
+}
+.menu li:hover {
+  background-color: var(--black);
+}
+
+textarea {
+  background-color: var(--black);
+  color: var(--white);
+  border: 0px;
+  border-radius: 5px;
+  border-left: var(--bkshade) 2px solid;
+}
+textarea:focus {
+  outline: 0;
+}
+
+button:active {
+  border-top: var(--black) 2px solid;
+  background-color: var(--aashade);
+  padding: -2px 10px 2px;
+  vertical-align: -1px;
+}
+
+button.destroy {
+  background: var(--accentb);
+  border-bottom: var(--abshade) 2px solid;
+}
+button.destroy:active {
+  border-top: var(--black) 2px solid;
+  background-color: var(--abshade);
+}
+
+form label {
+  display: block;
+  width: 100px;
+}
+form textarea {
+  width: 995px;
+  resize: none;
+}
+form #title {
+  height: 20px;
+}
+form #lead {
+  height: 40px;
+}
+form #body {
+  height: 200px;
+}
+form #file {
+  width: 900px;
+  padding: 4px;
+  border-radius: 5px;
+  margin-top: 5px;
+  color: var(--whshade);
+  background-color: var(--black);
+  font-style: italic;
+}
+form #submit {
+  float: right;
+  height: 30px;
+}
+form #submit.inline {
+  margin-top: 5px;
+}
+.pagestub {
+  background-color: #222;
+  font-size: 12px;
+  border-radius: 10px;
+  border: 0;
+  outline: 0;
+  padding: 5px 10px 10px;
+  margin: 5px auto;
+  font-family: 'Segoe UI';
+}
+.pagestub:hover {
+  border-left: solid 3px var(--accenta);
+  padding-left: 7px;
+}
+.pagestub p,
+.pagestub h1 {
+  margin: 0 auto;
+}
+.lead {
+  font-style: italic;
+}
+.pagestub a {
+  color: inherit;
+  text-decoration: inherit;
+}
+.aside {
+  font-size: small;
+  color: #707070;
+  margin-top: 0;
+  padding-right: 1em;
+}
+.pagestub .aside {
+  color: #555;
+}

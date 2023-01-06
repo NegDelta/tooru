@@ -20,5 +20,9 @@
         "caughtErrorsIgnorePattern": "^_"
       }
     ]
+  },
+  "env": {
+    "browser": true,
+    "node": true
   }
 }
